@@ -1,26 +1,30 @@
 {
-  "name": "rad-tutorial",
+  "name": "fulcro-rad",
   "version": "1.0.0",
-  "description": "Files related to tutorial videos",
+  "description": "= Fulcro Rapid Application Development Tools",
+  "main": "index.js",
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fulcrologic/fulcro-rad-tutorial.git"
+    "url": "git+https://github.com/fulcrologic/fulcro-rad.git"
   },
   "author": "Fulcrologic, LLC",
   "license": "MIT",
   "bugs": {
+    "url": "https://github.com/fulcrologic/fulcro-rad/issues"
   },
+  "homepage": "https://github.com/fulcrologic/fulcro-rad#readme",
   "dependencies": {
-    "@js-joda/locale_en-us": "2.0.1",
+    "@js-joda/core": "^4.2.1",
+    "@js-joda/timezone": "^2.8.0",
     "big.js": "5.2.2",
-    "js-joda": "1.11.0",
-    "js-joda-timezone": "2.1.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "semantic-ui-react": "^0.88.2",
-    "shadow-cljs": "2.10.19",
+    "intl-messageformat": "^9.3.11",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "semantic-ui-react": "2.1.4",
     "victory": "^34.3.6"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "shadow-cljs": "2.20.16"
+  }
 }
