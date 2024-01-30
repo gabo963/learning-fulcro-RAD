@@ -5,13 +5,6 @@
                [com.fulcrologic.semantic-ui.modules.dropdown.ui-dropdown-item :refer [ui-dropdown-item]]])
     #?(:clj  [com.fulcrologic.fulcro.dom-server :as dom :refer [div label input]]
        :cljs [com.fulcrologic.fulcro.dom :as dom :refer [div label input]])
-    [com.example.ui.account-forms :refer [AccountForm AccountList]]
-    [com.example.ui.dashboard :as dashboard]
-    [com.example.ui.invoice-forms :refer [InvoiceForm InvoiceList AccountInvoices]]
-    [com.example.ui.item-forms :refer [ItemForm InventoryReport]]
-    [com.example.ui.login-dialog :refer [LoginForm]]
-    [com.example.ui.master-detail :as mdetail]
-    [com.example.ui.sales-report :as sales-report]
     [com.example.ui.todo-forms :refer [TodoForm TodoReport]]
     [com.fulcrologic.fulcro.application :as app]
     [com.fulcrologic.fulcro.components :as comp :refer [defsc]]
@@ -33,11 +26,7 @@
 ;; This will just be a normal router...but there can be many of them.
 (defrouter MainRouter [this {:keys [current-state route-factory route-props]}]
   {:always-render-body? true
-   :router-targets      [LandingPage ItemForm TodoForm TodoReport  InvoiceList AccountList AccountForm AccountInvoices
-                         sales-report/SalesReport InventoryReport
-                         sales-report/RealSalesReport
-                         dashboard/Dashboard
-                         mdetail/AccountList]}
+   :router-targets      [LandingPage TodoForm TodoReport]}
   ;; Normal Fulcro code to show a loader on slow route change (assuming Semantic UI here, should
   ;; be generalized for RAD so UI-specific code isn't necessary)
   (dom/div
@@ -46,10 +35,6 @@
       (route-factory route-props))))
 
 (def ui-main-router (comp/factory MainRouter))
-
-(auth/defauthenticator Authenticator {:local LoginForm})
-
-(def ui-authenticator (comp/factory Authenticator))
 
 (defsc Root [this {::auth/keys [authorization]
                    ::app/keys  [active-remotes]
@@ -72,26 +57,7 @@
                (ui-dropdown {:className "item" :text "To-Dos"}
                  (ui-dropdown-menu {}
                    (ui-dropdown-item {:onClick (fn [] (rroute/route-to! this TodoReport {}))} "View All To-Do")
-                   (ui-dropdown-item {:onClick (fn [] (form/create! this TodoForm))} "New")
-                   #_(ui-dropdown-item {:onClick (fn [] (rroute/route-to! this AccountInvoices {:account/id (new-uuid 101)}))} "Invoices for Account 101")))
-               (ui-dropdown {:className "item" :text "Account"}
-                 (ui-dropdown-menu {}
-                   (ui-dropdown-item {:onClick (fn [] (rroute/route-to! this AccountList {}))} "View All")
-                   (ui-dropdown-item {:onClick (fn [] (form/create! this AccountForm))} "New")))
-               (ui-dropdown {:className "item" :text "Inventory"}
-                 (ui-dropdown-menu {}
-                   (ui-dropdown-item {:onClick (fn [] (rroute/route-to! this InventoryReport {}))} "View All")
-                   (ui-dropdown-item {:onClick (fn [] (form/create! this ItemForm))} "New")))
-               (ui-dropdown {:className "item" :text "Invoices"}
-                 (ui-dropdown-menu {}
-                   (ui-dropdown-item {:onClick (fn [] (rroute/route-to! this InvoiceList {}))} "View All")
-                   (ui-dropdown-item {:onClick (fn [] (form/create! this InvoiceForm))} "New")
-                   (ui-dropdown-item {:onClick (fn [] (rroute/route-to! this AccountInvoices {:account/id (new-uuid 101)}))} "Invoices for Account 101")))
-               (ui-dropdown {:className "item" :text "Reports"}
-                 (ui-dropdown-menu {}
-                   (ui-dropdown-item {:onClick (fn [] (rroute/route-to! this dashboard/Dashboard {}))} "Dashboard")
-                   (ui-dropdown-item {:onClick (fn [] (rroute/route-to! this sales-report/RealSalesReport {}))} "Sales Report")
-                   (ui-dropdown-item {:onClick (fn [] (rroute/route-to! this mdetail/AccountList {}))} "Master Detail"))))))
+                   (ui-dropdown-item {:onClick (fn [] (form/create! this TodoForm))} "New"))))))
 
         (div :.right.menu
           (div :.item

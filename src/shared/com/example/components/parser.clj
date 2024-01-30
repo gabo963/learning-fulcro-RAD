@@ -7,9 +7,6 @@
     [com.example.components.delete-middleware :as delete]
     [com.example.components.save-middleware :as save]
     [com.example.model :refer [all-attributes]]
-    [com.example.model.account :as account]
-    [com.example.model.invoice :as invoice]
-    [com.example.model.todo :as todo]
     [com.example.model.timezone :as timezone]
     [com.fulcrologic.rad.attributes :as attr]
     [com.fulcrologic.rad.blob :as blob]
@@ -17,11 +14,10 @@
     [com.fulcrologic.rad.form :as form]
     [com.fulcrologic.rad.pathom :as pathom]
     [mount.core :refer [defstate]]
-    [com.example.model.sales :as sales]
-    [com.example.model.item :as item]
     [com.wsscode.pathom.core :as p]
     [com.fulcrologic.rad.type-support.date-time :as dt]
-    [com.wsscode.pathom.connect :as pc]))
+    [com.wsscode.pathom.connect :as pc]
+    [com.example.model.todo :as todo]))
 
 (pc/defresolver index-explorer [{::pc/keys [indexes]} _]
                 {::pc/input  #{:com.wsscode.pathom.viz.index-explorer/id}
@@ -50,10 +46,6 @@
     [automatic-resolvers
      form/resolvers
      (blob/resolvers all-attributes)
-     account/resolvers
-     invoice/resolvers
-     item/resolvers
-     sales/resolvers
      timezone/resolvers
      todo/resolvers
      index-explorer]))
