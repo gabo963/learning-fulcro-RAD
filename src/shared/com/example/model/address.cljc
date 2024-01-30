@@ -6,7 +6,6 @@
 
 (defattr id :address/id :uuid
   {ao/identity?                                     true
-   :com.fulcrologic.rad.database-adapters.sql/table "address"
    ao/schema                                        :production})
 
 (defattr street :address/street :string

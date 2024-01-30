@@ -12,6 +12,7 @@
     [com.example.ui.login-dialog :refer [LoginForm]]
     [com.example.ui.master-detail :as mdetail]
     [com.example.ui.sales-report :as sales-report]
+    [com.example.ui.todo-forms :refer [TodoForm TodoReport]]
     [com.fulcrologic.fulcro.application :as app]
     [com.fulcrologic.fulcro.components :as comp :refer [defsc]]
     [com.fulcrologic.fulcro.dom.html-entities :as ent]
@@ -32,7 +33,7 @@
 ;; This will just be a normal router...but there can be many of them.
 (defrouter MainRouter [this {:keys [current-state route-factory route-props]}]
   {:always-render-body? true
-   :router-targets      [LandingPage ItemForm InvoiceForm InvoiceList AccountList AccountForm AccountInvoices
+   :router-targets      [LandingPage ItemForm TodoForm TodoReport  InvoiceList AccountList AccountForm AccountInvoices
                          sales-report/SalesReport InventoryReport
                          sales-report/RealSalesReport
                          dashboard/Dashboard
@@ -68,6 +69,11 @@
         (when logged-in?
           #?(:cljs
              (comp/fragment
+               (ui-dropdown {:className "item" :text "To-Dos"}
+                 (ui-dropdown-menu {}
+                   (ui-dropdown-item {:onClick (fn [] (rroute/route-to! this TodoReport {}))} "View All To-Do")
+                   (ui-dropdown-item {:onClick (fn [] (form/create! this TodoForm))} "New")
+                   #_(ui-dropdown-item {:onClick (fn [] (rroute/route-to! this AccountInvoices {:account/id (new-uuid 101)}))} "Invoices for Account 101")))
                (ui-dropdown {:className "item" :text "Account"}
                  (ui-dropdown-menu {}
                    (ui-dropdown-item {:onClick (fn [] (rroute/route-to! this AccountList {}))} "View All")

@@ -9,6 +9,7 @@
     [com.example.model :refer [all-attributes]]
     [com.example.model.account :as account]
     [com.example.model.invoice :as invoice]
+    [com.example.model.todo :as todo]
     [com.example.model.timezone :as timezone]
     [com.fulcrologic.rad.attributes :as attr]
     [com.fulcrologic.rad.blob :as blob]
@@ -54,4 +55,5 @@
      item/resolvers
      sales/resolvers
      timezone/resolvers
+     todo/resolvers
      index-explorer]))

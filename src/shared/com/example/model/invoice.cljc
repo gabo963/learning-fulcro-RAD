@@ -22,7 +22,7 @@
 
 (defattr date :invoice/date :instant
   {::form/field-style           :date-at-noon
-   ::datetime/default-time-zone "America/Los_Angeles"
+   ::datetime/default-time-zone "America/Bogota"
    ao/required? true
    ao/identities                #{:invoice/id}
    ao/schema                    :production})
